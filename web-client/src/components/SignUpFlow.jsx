@@ -42,7 +42,7 @@ function handleFormSubmit(ev){
 
 
 
-<div className='bg-red-200 sm:max-w-[380px] max-w-md mx-auto'>
+<div className='bg-red-200 max-w-[380px] mx-auto'>
             <div className='mb-5'>
                 <span className='text-3xl font-semibold'>Sign up to Dribble</span>
             </div>
@@ -68,7 +68,7 @@ function handleFormSubmit(ev){
     <label>Name</label>
 </div>
 <div>
-<input type='text'></input>
+<input className='bg-[#F3F3F3] hover:' type='text'></input>
 </div>
 </div>
 
