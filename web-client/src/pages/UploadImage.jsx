@@ -1,21 +1,23 @@
 import React from 'react'
+import HeadingHero from '../components/HeadingHero'
+import Navbar from '../components/Navbar'
+import { Link } from 'react-router-dom'
 
 const UploadImage = () => {
-  return (<div className='h-screen flex justify-center items-center'>
-
+  return (
+  
+<div className='flex flex-col justify-center items-center'>
+  <Navbar />
 
 <div>
-<div className='mb-6'>
-  <h1 className='font-extrabold text-3xl mb-5'>Welcome! Let's create your profile</h1>
-  <span className='text-slate-600'>Let others get to know you better! You can do these later</span>
-</div>
+  <HeadingHero heading={"Welcome Ananya! Let's create your profile"} subheading={"Let others get to know you better! You can do these later"} />
 
 <div className=''>
 <form className="">
 
 <div className='mb-6'>
 <h2 className="text-lg font-extrabold mb-4">Add an avatar</h2>
-<div className='flex items-center gap-4'>
+<div className='flex flex-wrap items-center gap-4'>
 <img className="h-[180px] w-[180px] object-cover border-2 border-dashed rounded-full" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1361&q=80" alt="Current profile photo" />
 <input type="file" className="text-sm text-slate-500
       file:mr-4 file:py-2 file:px-4
@@ -34,7 +36,9 @@ const UploadImage = () => {
 
 </div>
   <div className='w-1/3'>
-  <button className='bg-[#EA4B8B] hover:bg-[#ea4b8ba3] text-white font-bold text-sm py-1 w-full rounded-lg mb-6'>Next</button>
+    <Link to={'/survey'}>
+  <button className='bg-[#EA4B8B] hover:bg-[#ea4b8ba3] text-white font-bold text-sm py-2 w-full rounded-lg mb-6'>Next</button>
+  </Link>
   </div>
 </form>
 </div>

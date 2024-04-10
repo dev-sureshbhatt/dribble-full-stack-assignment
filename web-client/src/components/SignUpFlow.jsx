@@ -34,7 +34,7 @@ function handleFormSubmit(ev){
 
 
   return (
-    <div className='font-mono flex h-screen justify-center'>
+    <div className='flex justify-center'>
         <div className="hidden md:inline sm:w-2/5">
             <img src='\src\assets\signup-bg2.png' className="h-screen w-full"/>
         </div>
