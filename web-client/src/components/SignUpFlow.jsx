@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import InputDiv from './InputDiv'
+import {Link} from 'react-router-dom' 
 
 
 
@@ -40,8 +41,8 @@ function handleFormSubmit(ev){
         
         <div className='sm:w-3/5 bg-white'>
             <div className='text-right'>
-                <span>Already a member?</span>
-                <span className='font-bold text-[#473B8F]'>Sign in</span>
+                <span>Already a member? </span>
+                <span className='font-bold'><Link to={'/upload-image'}> Sign in</Link></span>
             </div>
 
 
@@ -74,12 +75,12 @@ function handleFormSubmit(ev){
 </form>
 <div className='mb-6 flex gap-1 items-start'>
     <input id='verify-terms' type='checkbox' />
-    <label htmlFor='verify-terms' className='text-slate-500 leading-4 font-normal'>Creating an account means you're okay with out terms of Service, Privacy Policy, and out default Notification Settings</label>
+    <label htmlFor='verify-terms' className='text-slate-500 leading-4 font-normal'>Creating an account means you're okay with out <Link to={'/'}>terms of Service, Privacy Policy</Link>, and our default <Link to={'/'}>Notification Settings</Link></label>
 </div>
 
-<button className="bg-[#EA4B8B] hover:bg-[#ea4b8ba3] text-white font-bold py-2 px-8 rounded-lg mb-6">Create Account</button>
+<button className="bg-[#EA4B8B] hover:bg-[#ea4b8ba3] text-white font-bold py-2 px-[40px] rounded-lg mb-6">Create Account</button>
 
-<p className='text-xs font-semibold text-slate-400'>This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service Apply</p>
+<p className='text-xs font-semibold text-slate-400'>This site is protected by reCAPTCHA and the <Link to={'/'}>Google Privacy Policy</Link> and <Link to={'/'}>Terms of Service</Link> Apply</p>
 </div>
 
 
