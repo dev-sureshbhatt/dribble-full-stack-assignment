@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import InputDiv from './InputDiv'
+import InputDiv from '../components/InputDiv'
 import {Link} from 'react-router-dom' 
 
 

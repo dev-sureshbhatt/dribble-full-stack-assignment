@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import './App.css'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
-import SignUpFlow from './components/SignUpFlow'
+import SignUpFlow from './pages/SignUpFlow'
 import UploadImage from './pages/UploadImage'
 import SurveyPage from './pages/SurveyPage'
-import Navbar from './components/Navbar'
+import ThankYou from './pages/ThankYou'
 
 
 
@@ -16,11 +16,10 @@ function App() {
     
     <Routes>
       
-      <Route index element={<SignUpFlow />} />
-    
-    
+      <Route index element={<SignUpFlow />} />    
       <Route path='/upload-image' element={<UploadImage />} />
       <Route path='/survey' element={<SurveyPage />} />
+      <Route path='/thank-you' element={<ThankYou />} />
       
     </Routes>
 
