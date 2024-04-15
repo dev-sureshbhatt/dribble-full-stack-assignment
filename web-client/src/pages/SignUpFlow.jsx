@@ -3,6 +3,18 @@ import InputDiv from "../components/InputDiv";
 import { Link } from "react-router-dom";
 
 const SignUpFlow = () => {
+
+  function handleFormSubmit(ev){
+    ev.preventDefault()
+  }
+    
+    
+    // const [formData, setFormData] = useState({})
+
+    // function handleChange(ev){
+    //     setFormData((prevFormData)=>({ ...prevFormData, [ev.target?.name]: ev.target?.value }))
+    //     console.log(formData)
+    //   }
   return (
     <section className="flex justify-center">
       
@@ -42,13 +54,14 @@ const SignUpFlow = () => {
 
 
         {/* form body goes here */}
-          <form>
+          <form onSubmit={handleFormSubmit}>
 
 
             <div className="flex justify-between flex-col gap-2 sm:flex-row ">
               
               {/* Importing each input components*/}
               <InputDiv 
+                name='name'
                 type="text" 
                 label="Name" 
                 placeholder="name"
@@ -56,6 +69,7 @@ const SignUpFlow = () => {
             />
               
               <InputDiv
+                name="username"
                 type="text"
                 label="Username"
                 placeholder="username"
@@ -65,6 +79,7 @@ const SignUpFlow = () => {
 
 
             <InputDiv 
+                name="email"
                 type="email"
                 label="Email" 
                 placeholder="email"
@@ -72,8 +87,13 @@ const SignUpFlow = () => {
 
 
             <InputDiv 
+                name="password"
                 label="Password" 
-                placeholder="6+ characters" />
+                placeholder="6+ characters"
+                type='password'
+                
+                
+            />
           
           
           
@@ -84,7 +104,10 @@ const SignUpFlow = () => {
             
             <input 
                 id="verify-terms" 
-                type="checkbox" />
+                type="checkbox"
+                required
+                
+                />
             
             <label
               htmlFor="verify-terms"

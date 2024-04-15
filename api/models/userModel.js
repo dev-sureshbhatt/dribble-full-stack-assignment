@@ -1,4 +1,4 @@
-import mongoose from mongoose
+import mongoose from 'mongoose'
 
 const userSchema = new mongoose.Schema({
 
@@ -14,14 +14,16 @@ const userSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        // Validate email format using a regex pattern
+        match: /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     },
     password: {
         type: String,
         required: true,
-        
+        minlength: 6
     }
 
 })
 
-const USER = mongoose.model('User', userSchema)
+export const USER = mongoose.model('User', userSchema)

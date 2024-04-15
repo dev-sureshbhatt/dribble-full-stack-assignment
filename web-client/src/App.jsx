@@ -1,17 +1,17 @@
-import { useState } from 'react'
 import './App.css'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import SignUpFlow from './pages/SignUpFlow'
 import UploadImage from './pages/UploadImage'
 import SurveyPage from './pages/SurveyPage'
 import ThankYou from './pages/ThankYou'
-
-
+import {Provider} from 'react-redux' 
+import store from './features/auth/store'
 
 function App() {
-  const [count, setCount] = useState(0)
+  
 
   return (
+    <Provider store={store}>
     <BrowserRouter>
     
     <Routes>
@@ -24,6 +24,7 @@ function App() {
     </Routes>
 
     </BrowserRouter>
+    </Provider>
   )
 }
 

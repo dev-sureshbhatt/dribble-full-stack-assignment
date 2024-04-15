@@ -3,6 +3,8 @@ import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import cors from 'cors'
 dotenv.config()
+import {USER} from './models/userModel.js'
+
 
 const app = express()
 const PORT =process.env.PORT
@@ -27,8 +29,30 @@ mongoose
 
 
 app.post('/api/users', (req,res,next)=> {
-    const {name, username, email, password} = req.body
-    console.log(name, email, password, username)
+    try {
+        const {name, username, email, password} = req.body
+        if (!name, !username, !email, !password) {
+            //using 422 for Unprocessable Entity
+            res.status(422).json({
+                "success": false,
+                "message": "Required fields are missing",
+                "responseData": null
+            })
+        }  
+        
+        
+    res.status(200).json({
+        "success": true,
+        "message": "Successful response",
+        "responseData": null
+    })  
+    } catch (error) {
+        console.log(error)
+    }
+    
+
+
+    
 } )
 
 
