@@ -6,8 +6,8 @@ const router = express.Router()
 //validate and create new user
 router.post('/users', async (req,res,next)=> {
     try {
-        const {name, username, email, password} = req.body
-        if (!name, !username, !email, !password) {
+        console.log("hi")
+        if (!req.name, !req.username, !req.email, !req.password) {
             console.log("inside required missing fields")
             //using 422 for Unprocessable Entity
             return res.status(422).json({
@@ -15,10 +15,14 @@ router.post('/users', async (req,res,next)=> {
                 "message": "Required fields are missing",
                 "responseData": null
             })
+
+            
             
         }  
         
-        if (name, username, email, password) {
+        if (req.name, req.username, req.email, req.password) {
+            const {name, username, email, password} = req.body
+
 
             const totalUsers = await USER.countDocuments()
             console.log(totalUsers)
@@ -36,7 +40,6 @@ router.post('/users', async (req,res,next)=> {
     
     } catch (error) {
         console.log("inside error")
-        console.log(error)
         return res.status(500).json({
             "success": false,
             "message": "Something went wrong on our servers. Please try again. If the problem persists, please try again after some time, we apologize for the inconvenience caused",
