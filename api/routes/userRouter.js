@@ -55,13 +55,19 @@ router.post("/users", async (req, res, next) => {
             const newCreatedUser = await hashAndStore(validatedValue); //hashing password, it returns null if proess is not success
             if (newCreatedUser) {
 
-            //when a user is created we sign a JWT
 
-            const signedToken = await signJWT(newCreatedUser) 
-            console.log("signed token is",signedToken)
+            //when a user is created we sign a JWT
+            const userToSign = {
+                id: newCreatedUser.id,
+                username: newCreatedUser.name
+            }
+
+            const signedToken = await signJWT(userToSign) 
+            
 
               return res
                 .status(201)
+                .cookie('token', signedToken, {})
                 .json({
                   success: true,
                   message: "User created successfully",
