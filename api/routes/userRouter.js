@@ -1,6 +1,7 @@
 import express from 'express'
 import {USER} from '../models/userModel.js'
 import { userValidationSchema } from '../utils/userValidationSchema.js'
+import { hashAndStore } from '../utils/hashAndStore.js'
 
 const router = express.Router()
 
@@ -30,17 +31,28 @@ router.post('/users', async (req,res,next)=> {
                 if (validatedValue){
                     const checkUsername = await USER.findOne({username: validatedValue.username})
                     const checkEmail = await USER.findOne({email: validatedValue.email})
-
-                    console.log(checkUsername, "check username")
-                    console.log(checkEmail, "check email")
                 
                     //if the username is found, we will further save the user else we will return response from here that username exists
                 if (!checkUsername && !checkEmail) {
-                    const newCreatedUser = await USER.create(validatedValue)
+                    //hashing password and storing in DB
+
+                    console.log("hashing password and storing in db", validatedValue)
+                    const newCreatedUser = await hashAndStore(validatedValue) //hashing password, it returns null if proess is not success
                     if (newCreatedUser) {
-                        return res.status(201).json({success:true, message: "User created successfully", responseData: newCreatedUser})
-                    }
-                } else 
+                            return res.status(201).json({success:true, message: "User created successfully", responseData: newCreatedUser})
+                        }
+                
+                    
+                    
+                
+                    // const newCreatedUser = await USER.create(validatedValue)
+                    
+                
+                } 
+                
+                else 
+                
+                
                 if (!checkEmail) {
                     return res.status(409).json({success:false, message: "Username already exists", responseData: null })
 
@@ -61,18 +73,14 @@ router.post('/users', async (req,res,next)=> {
             }
 
 
-            console.log("outside validation")
 
-            const totalUsers = await USER.countDocuments()
-            console.log(totalUsers)
-
-            return res.status(200).json({
-                "success": true,
-                "message": "Successful response",
-                "responseData": {user: {
-                    name, username, email, password
-                }    } 
-            })  
+            // return res.status(200).json({
+            //     "success": true,
+            //     "message": "Successful response",
+            //     "responseData": {user: {
+            //         name, username, email, password
+            //     }    } 
+            // })  
 
         }
 
