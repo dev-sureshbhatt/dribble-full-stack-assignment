@@ -4,17 +4,24 @@ import { Link } from "react-router-dom";
 
 const SignUpFlow = () => {
 
-  function handleFormSubmit(ev){
-    ev.preventDefault()
-  }
-    
-    
-    // const [formData, setFormData] = useState({})
+  const [formData, setFormData] = useState({
+    name: "",
+    username: "",
+    email: "",
+    password: "",
+  });
 
-    // function handleChange(ev){
-    //     setFormData((prevFormData)=>({ ...prevFormData, [ev.target?.name]: ev.target?.value }))
-    //     console.log(formData)
-    //   }
+  const handleChange = (fieldName, value) => {
+    setFormData((prevFormData) => ({ ...prevFormData, [fieldName]: value }));
+  };
+
+  const handleFormSubmit = (ev) => {
+    ev.preventDefault();
+    // Send formData to API
+    console.log(formData);
+  };
+    
+  
   return (
     <section className="flex justify-center">
       
@@ -66,6 +73,8 @@ const SignUpFlow = () => {
                 label="Name" 
                 placeholder="name"
                 required='true'
+                value={formData.name}
+                onChange={(value) => handleChange("name", value)}
             />
               
               <InputDiv
@@ -74,6 +83,8 @@ const SignUpFlow = () => {
                 label="Username"
                 placeholder="username"
                 required='true'
+                value={formData.username}
+                onChange={(value) => handleChange("username", value)}
               />
             </div>
 
@@ -83,7 +94,10 @@ const SignUpFlow = () => {
                 type="email"
                 label="Email" 
                 placeholder="email"
-                required="true" />
+                required="true"
+                value={formData.email}
+              onChange={(value) => handleChange("email", value)}
+                />
 
 
             <InputDiv 
@@ -91,6 +105,9 @@ const SignUpFlow = () => {
                 label="Password" 
                 placeholder="6+ characters"
                 type='password'
+                value={formData.password}
+              onChange={(value) => handleChange("password", value)}
+              required="true"
                 
                 
             />

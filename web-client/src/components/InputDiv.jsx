@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 
-const InputDiv = ({...props}) => {
+const InputDiv = ({onChange, ...props}) => {
+
+  const  [value, setValue] = useState("")
   
   return (
     
@@ -11,7 +13,16 @@ const InputDiv = ({...props}) => {
     <label className='font-bold'>{props.label}</label>
 </div>
 <div>
-<input name={props.name} type={props.type} autoComplete='off' className='bg-[#F3F3F3] placeholder-slate-500 focus:outline-none px-3 py-2 rounded-md w-full' placeholder={props.placeholder}></input>
+<input 
+      onChange={
+        (ev)=>onChange(ev.target.value)
+      } 
+      name={props.name} 
+      type={props.type} 
+      autoComplete='off' 
+      className='bg-[#F3F3F3] placeholder-slate-500 focus:outline-none px-3 py-2 rounded-md w-full' 
+      placeholder={props.placeholder}>
+</input>
 </div>
 
 
