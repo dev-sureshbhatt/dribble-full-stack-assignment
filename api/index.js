@@ -35,10 +35,11 @@ app.use('/api', userRouter)
 //error handler
 app.use((err,req,res,next)=>{
     const statusCode = err.statusCode || 500
-    const message = err.message || "Internal server error"
+    const rawMessage = err.message || "Internal server error"
+    const messageForClient = "Something went wrong, please try again."
     res.status(statusCode).json({
         "success": "false",
-        message,
-        statusCode
+        messageForClient,
+        responseData: null
     })
 })
