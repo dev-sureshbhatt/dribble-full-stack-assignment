@@ -2,6 +2,7 @@ import express from "express";
 import { USER } from "../models/userModel.js";
 import { userValidationSchema } from "../utils/userValidationSchema.js";
 import { hashAndStore } from "../utils/hashAndStore.js";
+import { signJWT } from "../utils/signJWT.js";
 
 const router = express.Router();
 
@@ -53,6 +54,12 @@ router.post("/users", async (req, res, next) => {
             //hashing password and storing in DB
             const newCreatedUser = await hashAndStore(validatedValue); //hashing password, it returns null if proess is not success
             if (newCreatedUser) {
+
+            //when a user is created we sign a JWT
+
+            const signedToken = await signJWT(newCreatedUser) 
+            console.log("signed token is",signedToken)
+
               return res
                 .status(201)
                 .json({
