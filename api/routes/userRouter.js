@@ -57,8 +57,7 @@ router.post('/users', async (req,res,next)=> {
             }
             catch (err) { 
                 console.log("error validating body", err)
-                
-                return next(err)
+                return res.status(400).json({success: false, message: "Please check all the fields and try again.", responseData: null})
             }
 
 
