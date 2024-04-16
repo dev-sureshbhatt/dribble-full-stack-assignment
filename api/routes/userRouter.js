@@ -1,14 +1,13 @@
 import express from 'express'
 import {USER} from '../models/userModel.js'
+import { userValidationSchema } from '../utils/userValidationSchema.js'
 
 const router = express.Router()
 
 //validate and create new user
 router.post('/users', async (req,res,next)=> {
     try {
-        console.log("hi")
-        if (!req.name, !req.username, !req.email, !req.password) {
-            console.log("inside required missing fields")
+        if (!req.body.name, !req.body.username, !req.body.email, !req.body.password) {
             //using 422 for Unprocessable Entity
             return res.status(422).json({
                 "success": false,
@@ -20,8 +19,20 @@ router.post('/users', async (req,res,next)=> {
             
         }  
         
-        if (req.name, req.username, req.email, req.password) {
+        if (req.body.name, req.body.username, req.body.email, req.body.password) {
             const {name, username, email, password} = req.body
+
+            console.log("valiating incoming body")
+            try {
+                console.log("inside try")
+                const value = await userValidationSchema.validateAsync(req.body);
+                console.log(value)
+                console.log("finish validating")
+            }
+            catch (err) { 
+                console.log("error validating body", err)
+            }
+
 
 
             const totalUsers = await USER.countDocuments()
