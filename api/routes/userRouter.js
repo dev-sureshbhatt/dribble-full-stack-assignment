@@ -9,7 +9,7 @@ router.post('/users', async (req,res,next)=> {
     try {
 
         //if there is no required data in request body, we will return error response from here
-        if (!req.body.name, !req.body.username, !req.body.email, !req.body.password) {
+        if (!req.body.name || !req.body.username || !req.body.email || !req.body.password) {
             //using 422 for Unprocessable Entity
             return res.status(422).json({
                 "success": false,
@@ -19,7 +19,7 @@ router.post('/users', async (req,res,next)=> {
         }  
         
         //if there is required data in request body
-        if (req.body.name, req.body.username, req.body.email, req.body.password) {
+        if (req.body.name && req.body.username && req.body.email && req.body.password) {
             
             
             const {name, username, email, password} = req.body
@@ -57,7 +57,7 @@ router.post('/users', async (req,res,next)=> {
             }
             catch (err) { 
                 console.log("error validating body", err)
-                return res.status(400).json({success: false, message: "Please check all the fields and try again.", responseData: null})
+                return res.status(400).json({success: false, message: err.details[0].message || "Please check all the fields and try again.", responseData: null})
             }
 
 
