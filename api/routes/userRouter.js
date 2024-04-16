@@ -22,18 +22,37 @@ router.post('/users', async (req,res,next)=> {
         if (req.body.name, req.body.username, req.body.email, req.body.password) {
             const {name, username, email, password} = req.body
 
-            console.log("valiating incoming body")
+            
             try {
-                console.log("inside try")
-                const value = await userValidationSchema.validateAsync(req.body);
+                
+                //validating request body and storing it in value if validation is ok
+                const value = await userValidationSchema.validateAsync({name, username,email, password});
                 console.log(value)
-                console.log("finish validating")
+                //if validation is success, we will further check the username 
+                if (value){
+                    const checkUsername = await USER.findOne({username: value.username})
+                console.log("username found is",checkUsername)
+                if (!checkUsername) {
+                    console.log("saving username")
+                    const newCreatedUser = await USER.create(value)
+                    console.log(newCreatedUser)
+                } else return res.status(401).json({"msg": "hii"})
+
+
+
+                }
+                
+
+                
             }
             catch (err) { 
                 console.log("error validating body", err)
+                
+                return next(err)
             }
 
 
+            console.log("outside validation")
 
             const totalUsers = await USER.countDocuments()
             console.log(totalUsers)
@@ -51,11 +70,7 @@ router.post('/users', async (req,res,next)=> {
     
     } catch (error) {
         console.log("inside error")
-        return res.status(500).json({
-            "success": false,
-            "message": "Something went wrong on our servers. Please try again. If the problem persists, please try again after some time, we apologize for the inconvenience caused",
-            "responseData": null
-        })
+        next(error)
     }
     
 
