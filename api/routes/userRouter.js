@@ -95,13 +95,14 @@ router.post("/users", async (req, res, next) => {
         }
       } catch (err) {
         console.log("error validating body", err);
+
+        const message1 = err?.details[0]?.message || "Please check all the fields and try again." 
         return res
           .status(400)
           .json({
             success: false,
             message:
-              err.details[0].message ||
-              "Please check all the fields and try again.",
+              message1,
             responseData: null,
           });
       }

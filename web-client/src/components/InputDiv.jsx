@@ -16,12 +16,14 @@ const InputDiv = ({onChange, ...props}) => {
 <input 
       onChange={
         (ev)=>onChange(ev.target.value)
-      } 
+      }
+      required 
       name={props.name} 
       type={props.type} 
       autoComplete='off' 
       className='bg-[#F3F3F3] placeholder-slate-500 focus:outline-none px-3 py-2 rounded-md w-full' 
       placeholder={props.placeholder}>
+      
 </input>
 </div>
 
