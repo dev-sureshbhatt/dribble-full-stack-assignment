@@ -1,8 +1,14 @@
 import React, { useState } from "react";
 import InputDiv from "../components/InputDiv";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const SignUpFlow = () => {
+
+  const [error, setError] = useState(null)
+
+  const navigate = useNavigate()
+
   const [formData, setFormData] = useState({
     name: "",
     username: "",
@@ -18,6 +24,7 @@ const SignUpFlow = () => {
     ev.preventDefault();
     // Send formData to API
     console.log(formData);
+    setError(null)
 
     //sending fetch request
 
@@ -30,11 +37,16 @@ const SignUpFlow = () => {
         response
           .json()
           .then((data) => {
+            //When the user creation is not successful, the API sends an object with success:false value. 
+            
             if(data.success == false) {
               console.log(data.message)
+              setError(data.message)
             }
+
             if (data.success == true){
               console.log(data.message)
+              navigate('/upload-image')
             }
           })
           .catch((err) => console.log(err))
@@ -66,16 +78,18 @@ const SignUpFlow = () => {
           </div>
 
           {/* for error messages display */}
-          <div className="mb-6">
+          
+          {error && (<div className="mb-6">
             <span>
               <ul
                 role="list"
                 className="marker:text-red-500 list-disc pl-5 space-y-3 text-red-500"
               >
-                <li role="listitem">Username is already been taken</li>
+                <li role="listitem">{error}</li>
               </ul>
             </span>
-          </div>
+          </div>)}
+          
 
           {/* form body goes here */}
           <form onSubmit={handleFormSubmit}>
