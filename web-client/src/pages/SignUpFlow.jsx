@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 const SignUpFlow = () => {
 
   const [error, setError] = useState(null)
+  const [loading, setLoading] = useState(false)
 
   const navigate = useNavigate()
 
@@ -22,6 +23,7 @@ const SignUpFlow = () => {
 
   const handleFormSubmit = (ev) => {
     ev.preventDefault();
+    setLoading(true)
     // Send formData to API
     console.log(formData);
     setError(null)
@@ -42,6 +44,7 @@ const SignUpFlow = () => {
             if(data.success == false) {
               console.log(data.message)
               setError(data.message)
+              setLoading(false)
             }
 
             if (data.success == true){
@@ -49,9 +52,15 @@ const SignUpFlow = () => {
               navigate('/upload-image')
             }
           })
-          .catch((err) => console.log(err))
+          .catch((err) => 
+          {setLoading(false)
+          console.log(err)})
       )
-      .catch((err) => alert("Failed to connect to the Server, please try again. If the problem persists, try again after some time. We apologize for the inconvenience"));
+      .catch((err) => {
+        alert("Failed to connect to the Server, please try again. If the problem persists, try again after some time. We apologize for the inconvenience")
+        setLoading(false)
+      
+      });
   };
 
   return (
@@ -151,8 +160,8 @@ const SignUpFlow = () => {
             </div>
 
             {/* form button */}
-            <button className="bg-[#EA4B8B] hover:bg-[#ea4b8ba3] text-white font-bold py-2 px-[40px] rounded-lg mb-6">
-              Create Account
+            <button disabled={loading} className="bg-[#EA4B8B] disabled:bg-[#ea4b8ba3] hover:bg-[#ea4b8ba3] text-white font-bold py-2 px-[40px] rounded-lg mb-6">
+              {loading ? ("Loading...") : ("Create Account")}
             </button>
           </form>
 
