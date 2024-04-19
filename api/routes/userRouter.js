@@ -140,53 +140,64 @@ router.post("/users", async (req, res, next) => {
 //verify token from cookies and update profile image and location
 router.put('/users/uploadimage', upload.single('file') , async (req,res)=>{
 
-  if (req.cookies.token) {
-
-    const {token} = req.cookies
-     //verify JWT here, if success, then parse file based on if file is present
-    const validTokenDetails = await verifyJWT(token)  
-
-    if (validTokenDetails) {
-
-      const { location = "" } = req.body;
-      let filePath = ""
-
-      if (req.file)  {
-        const {path, originalname} = req.file
-        const parts = originalname.split(".")
-        const ext = parts[parts.length -1]
-        const newPath = path + '.' + ext
-        filePath = newPath
-        fs.renameSync(path, newPath)
-      }
-      //need to verify token and then put this logic
-  
-      //if location is not provided, we will keep it empty
+  try {
+    if (req.cookies.token) {
       
-      const updatedDoc = await USER.findByIdAndUpdate(validTokenDetails.newCreatedUser.id, {location: location, profileImage: filePath})
-      if (updatedDoc) {
-        res.json({success: true})
-      }
-      else {
-      res.json({success: false})
-      }
-    
-
-
-
-
-
-    } else
-    if (!validTokenDetails) {
-      res.json({sucess: false, message: "You are either not authorized or the session has expired, please login to continue"})
-    }
-    
-
-
-  } else {
-    res.json({sucess: false, message: "Cookie not present. Session expired, please login to continue"})
-  }
   
+      const {token} = req.cookies
+       //verify JWT here, if success, then parse file based on if file is present
+      const validTokenDetails = await verifyJWT(token)  
+  
+      if (validTokenDetails) {
+  
+        const { location = "" } = req.body;
+        
+  
+        if (req.file)  {
+          var filePath = ""
+          const {path, originalname} = req.file
+          const parts = originalname.split(".")
+          const ext = parts[parts.length -1]
+          const newPath = path + '.' + ext
+          filePath = newPath
+          fs.renameSync(path, newPath)
+        }
+        //need to verify token and then put this logic
+    
+        //if location is not provided, we will keep it empty
+        
+        const updatedDoc = await USER.findByIdAndUpdate(validTokenDetails.newCreatedUser.id, {location: location, profileImage: filePath})
+        if (updatedDoc) {
+          //sending updated data (this is not the data returned from DB after updation. These data are just to update form state in the UI)
+          res.status(200).json({success: true, message: "User profile/location updated", responseData: {updateLocation: location, updatedProfileImage: filePath}})
+        }
+        else {
+        res.status(422).json({success: false, message: "Something went wrong validating your request, please signout and try logging in again", responseData: {requestedLocationUpdate: location, requestedProfileImageUpdate: filePath}})
+        }
+      
+  
+  
+  
+  
+  
+      } else
+      if (!validTokenDetails) {
+        res.status(401).json({sucess: false, message: "Unauthorized or Session expired, please login to continue", responseData: {user: null}})
+      }
+      
+  
+  
+    } else {
+      res.status(401).json({sucess: false, message: "Unauthorized or Session expired, please login to continue", responseData: {user: null}})
+    }
+  
+    
+  } catch (error) {
+
+    next(error)
+    
+  }
+    
  
 
 
