@@ -3,8 +3,11 @@ import { USER } from "../models/userModel.js";
 import { userValidationSchema } from "../utils/userValidationSchema.js";
 import { hashAndStore } from "../utils/hashAndStore.js";
 import { signJWT } from "../utils/signJWT.js";
+import multer from 'multer'
 
 const router = express.Router();
+const upload = multer({dest: 'api/uploads/'})
+
 
 //validate and create new user
 router.post("/users", async (req, res, next) => {
@@ -129,9 +132,30 @@ router.post("/users", async (req, res, next) => {
 
 
 
-router.post('/users/uploadimage', (req,res)=>{
+router.post('/users/uploadimage', upload.single('file') , (req,res)=>{
+  
+ console.log(req.files)
+ console.log(req.file) 
   console.log("incoming request")
-  console.log(req.cookies)
+
+
+  try {
+
+    if (req.cookies.token) {
+
+      console.log(req.cookies.token)
+
+    }
+    else {
+
+      res.json("need token for identification")
+
+    }
+    
+  } catch (error) {
+    
+  }
+  
 })
 
 
