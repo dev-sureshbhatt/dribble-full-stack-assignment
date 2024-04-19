@@ -21,8 +21,23 @@ const SurveyPage = () => {
     ]
   })
 
-  function handleClick(){
-    navigate('/thank-you')
+  function handleSubmit(){
+    const userDetails = {
+      heading: surveyFormData.heading,
+      subheading: surveyFormData.subheading,
+      options: surveyFormData.options
+    };
+
+    console.log(userDetails)
+    // navigate('/thank-you')
+
+  }
+
+  function handleCheckboxToggle(index){
+
+  const updatedOptions = [...surveyFormData.options]
+  updatedOptions[index].checked = !updatedOptions[index].checked
+  setSurveyFormData({ ...surveyFormData, options: updatedOptions })
 
   }
   
@@ -45,6 +60,7 @@ const SurveyPage = () => {
     imageURL={'https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1361&q=80'}
     label={option.label}
     checked={option.checked}
+    onToggle={()=>handleCheckboxToggle(index)}
 
 
     />
@@ -58,7 +74,7 @@ const SurveyPage = () => {
 
         </div>
         
-        <button onClick={handleClick} className='bg-[#EA4B8B] hover:bg-[#ea4b8ba3] text-white font-bold text-sm py-2 rounded-lg w-1/5'>Finish</button>
+        <button onClick={handleSubmit} className='bg-[#EA4B8B] hover:bg-[#ea4b8ba3] text-white font-bold text-sm py-2 rounded-lg w-1/5'>Finish</button>
         
     </div>
     </div>
