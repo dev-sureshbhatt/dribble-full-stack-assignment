@@ -15,6 +15,19 @@ app.use(cookieParser({sameSite: 'none', Secure: false, httpOnly: true}))
 app.use(express.json())
 
 
+//start -- todisplay image files in browser
+import { fileURLToPath } from 'url'
+import path from 'path'
+import {dirname} from 'path'
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+const uploadsDirectory = path.join(__dirname, 'uploads');
+app.use('/uploads', express.static(uploadsDirectory));
+//end
+
+
+
+
 app.listen(PORT, ()=>{
     console.log("app listening at PORT", PORT)
 })
