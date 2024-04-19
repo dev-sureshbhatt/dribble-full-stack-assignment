@@ -3,6 +3,7 @@ import { USER } from "../models/userModel.js";
 import { userValidationSchema } from "../utils/userValidationSchema.js";
 import { hashAndStore } from "../utils/hashAndStore.js";
 import { signJWT } from "../utils/signJWT.js";
+import { verifyJWT } from "../utils/verifyJWT.js";
 import multer from 'multer'
 import fs from 'fs'
 
@@ -132,35 +133,60 @@ router.post("/users", async (req, res, next) => {
 });
 
 
+//verify token from cookies and update profile image and location
+router.put('/users/uploadimage', upload.single('file') , async (req,res)=>{
 
-router.post('/users/uploadimage', upload.single('file') , (req,res)=>{
+  if (req.cookies.token) {
+
+    const {token} = req.cookies
+     //verify JWT here, if success, then parse file based on if file is present
+    const validTokenDetails = await verifyJWT(token)  
+
+    if (validTokenDetails) {
+
+      const { location = "" } = req.body;
+      let filePath = ""
+
+      if (req.file)  {
+        const {path, originalname} = req.file
+        const parts = originalname.split(".")
+        const ext = parts[parts.length -1]
+        const newPath = path + '.' + ext
+        filePath = newPath
+        fs.renameSync(path, newPath)
+      }
+      //need to verify token and then put this logic
+  
+      //if location is not provided, we will keep it empty
+      
+      const updatedDoc = await USER.findByIdAndUpdate(validTokenDetails.newCreatedUser.id, {location: location, profileImage: filePath})
+      if (updatedDoc) {
+        res.json({success: true})
+      }
+      else {
+      res.json({success: false})
+      }
+    
+
+
+
+
+
+    } else
+    if (!validTokenDetails) {
+      res.json({sucess: false, message: "You are either not authorized or the session has expired, please login to continue"})
+    }
+    
+
+
+  } else {
+    res.json({sucess: false, message: "Cookie not present. Session expired, please login to continue"})
+  }
   
  
 
-  const {path, originalname} = req.file
-    const parts = originalname.split(".")
-    const ext = parts[parts.length -1]
-    const newPath = path + '.' + ext
 
-   
-    fs.renameSync(path, newPath)
 
-  try {
-
-    if (req.cookies.token) {
-
-      console.log(req.cookies.token)
-
-    }
-    else {
-
-      res.json("need token for identification")
-
-    }
-    
-  } catch (error) {
-    
-  }
   
 })
 

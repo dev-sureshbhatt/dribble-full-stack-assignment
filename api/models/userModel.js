@@ -22,7 +22,16 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         // minlength: 6 not using this since we will store hashed password here
+    },
+    location: {
+        type: String,
+        default: ""
+    },
+    profileImage: {
+        type: String,
+        default: ""
     }
+
 
 })
 

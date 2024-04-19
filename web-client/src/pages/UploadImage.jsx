@@ -58,7 +58,14 @@ className="">
 <div className='mb-6'>
 <h2 className="text-lg font-extrabold mb-4">Add an avatar</h2>
 <div className='flex flex-wrap items-center gap-4'>
-<img className="h-[180px] w-[180px] object-cover border-2 border-dashed rounded-full" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1361&q=80" alt="Current profile photo" />
+
+<img
+      className="h-[180px] w-[180px] object-cover border-2 border-dashed rounded-full"
+      src={profileImage && profileImage.length > 0 ? URL.createObjectURL(profileImage[0]) : "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1361&q=80"}
+      alt="Selected profile photo"
+    />
+{/* <img className="h-[180px] w-[180px] object-cover border-2 border-dashed rounded-full" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1361&q=80" alt="Current profile photo" /> */}
+
 <input 
   type="file"
   name="file"

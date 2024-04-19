@@ -4,10 +4,10 @@ const privateKey = "656f56d5f6d5f65df6da6a5s6as6we65r6e5"
 export const signJWT  = (newCreatedUser) => {
     return new Promise((resolve, reject)=>{
 
-        jwt.sign({newCreatedUser}, privateKey, {expiresIn: "1h"}, function(err, token) {
+        jwt.sign({newCreatedUser}, privateKey, function(err, token) {
             if (token) {
                 resolve(token)
-            } else resolve(err)
+            } else resolve("err")
           })
 
 
