@@ -209,6 +209,7 @@ router.put('/user/details', async (req,res)=>{
   if (req.cookies.token) {
 
     const {token} = req.cookies.token
+    
 
 
   } else {
