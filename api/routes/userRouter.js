@@ -4,6 +4,7 @@ import { userValidationSchema } from "../utils/userValidationSchema.js";
 import { hashAndStore } from "../utils/hashAndStore.js";
 import { signJWT } from "../utils/signJWT.js";
 import multer from 'multer'
+import fs from 'fs'
 
 const router = express.Router();
 const upload = multer({dest: 'api/uploads/'})
@@ -134,10 +135,15 @@ router.post("/users", async (req, res, next) => {
 
 router.post('/users/uploadimage', upload.single('file') , (req,res)=>{
   
- console.log(req.files)
- console.log(req.file) 
-  console.log("incoming request")
+ 
 
+  const {path, originalname} = req.file
+    const parts = originalname.split(".")
+    const ext = parts[parts.length -1]
+    const newPath = path + '.' + ext
+
+   
+    fs.renameSync(path, newPath)
 
   try {
 
