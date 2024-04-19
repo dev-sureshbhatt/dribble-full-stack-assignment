@@ -1,4 +1,4 @@
-//file that handles password hashing and storing user to db
+//function that handles password hashing and storing user to db.
 import bcrypt from 'bcryptjs'
 import { USER } from '../models/userModel.js'
 

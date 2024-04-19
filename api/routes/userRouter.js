@@ -15,7 +15,7 @@ const upload = multer({dest: 'api/uploads/'})
 
 
 
-//validate and create new user
+/* Route to validate and create new user (First signup flow with basic but mandatory fields: name, email, username, password) */
 router.post("/users", async (req, res, next) => {
   try {
     //if there is no required data in request body, we will return error response from here
@@ -137,7 +137,7 @@ router.post("/users", async (req, res, next) => {
 });
 
 
-//verify token from cookies and update profile image and location
+/* Route to add/update profile image and location - after verifying JWT token from cookies */
 router.put('/users/uploadimage', upload.single('file') , async (req,res)=>{
 
   try {
@@ -193,7 +193,6 @@ router.put('/users/uploadimage', upload.single('file') , async (req,res)=>{
   
     
   } catch (error) {
-
     next(error)
     
   }
@@ -204,6 +203,19 @@ router.put('/users/uploadimage', upload.single('file') , async (req,res)=>{
 
   
 })
+
+/* Route to update other information about the user (survey form viz what brings you to Dribble) */
+router.put('/user/details', async (req,res)=>{
+  if (req.cookies.token) {
+
+    const {token} = req.cookies.token
+
+
+  } else {
+    res.json({msg: "You're not authorized or Session expired, please login again"})
+  }
+})
+
 
 
 export default router;

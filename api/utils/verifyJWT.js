@@ -1,4 +1,6 @@
-import jwt, { decode } from 'jsonwebtoken'
+//function to verify if the provided token is valid or not
+
+import jwt from 'jsonwebtoken'
 const privateKey = "656f56d5f6d5f65df6da6a5s6as6we65r6e5"
 
 export const verifyJWT  = (token) => {

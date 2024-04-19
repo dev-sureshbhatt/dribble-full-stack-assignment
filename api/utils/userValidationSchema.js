@@ -1,3 +1,5 @@
+// Signup form user data Schema definition - for validating incoming request body data
+
 import Joi from "joi";
 
 export const userValidationSchema = Joi.object({

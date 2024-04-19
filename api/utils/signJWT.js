@@ -1,3 +1,5 @@
+//function to Issue JWT token
+
 import jwt from 'jsonwebtoken'
 const privateKey = "656f56d5f6d5f65df6da6a5s6as6we65r6e5"
 
