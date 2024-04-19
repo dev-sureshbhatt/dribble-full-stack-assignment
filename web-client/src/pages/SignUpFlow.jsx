@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import InputDiv from "../components/InputDiv";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import {useDispatch, useSelector} from 'react-redux'
+import { setCredentials } from "../features/auth/authSlice";
 
 const SignUpFlow = () => {
 
@@ -9,6 +11,7 @@ const SignUpFlow = () => {
   const [loading, setLoading] = useState(false)
 
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const [formData, setFormData] = useState({
     name: "",
@@ -49,6 +52,11 @@ const SignUpFlow = () => {
 
             if (data.success == true){
               console.log(data.message)
+              console.log("respone data is", data.responseData)
+              console.log("dispatching Redux state")
+              dispatch(setCredentials(data))
+              console.log("dispatched, please check state")
+
               navigate('/upload-image')
             }
           })

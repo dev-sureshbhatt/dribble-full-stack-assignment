@@ -67,11 +67,17 @@ router.post("/users", async (req, res, next) => {
 
               return res
                 .status(201)
-                .cookie('token', signedToken, {})
+                .cookie('token', signedToken, {
+                  httpOnly: true,
+                  sameSite: 'none',
+                  secure: false
+
+                })
                 .json({
                   success: true,
                   message: "User created successfully",
                   responseData: newCreatedUser,
+                  // accessToken: signedToken
                 });
             }
 
@@ -120,5 +126,13 @@ router.post("/users", async (req, res, next) => {
     next(error);
   }
 });
+
+
+
+router.post('/users/uploadimage', (req,res)=>{
+  console.log("incoming request")
+  console.log(req.cookies)
+})
+
 
 export default router;
