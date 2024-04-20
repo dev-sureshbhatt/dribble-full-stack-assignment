@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react'
 import HeadingHero from '../components/HeadingHero'
 import Navbar from '../components/Navbar'
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { batch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 
 const UploadImage = () => {
+  const BASEURL = 'https://aeonaxy-full-stack-assignment.onrender.com'
 
   const [profileImage, setProfileImage] = useState([])
   const [location, setLocation] = useState("")
@@ -31,8 +32,8 @@ const UploadImage = () => {
     data.set('location', location)
     
     
-    fetch("http://localhost:4000/api/users/uploadimage", {
-      method: "POST",
+    fetch(`${BASEURL}/api/users/uploadimage`, {
+      method: "PUT",
       body: data,
       credentials: 'include'
     })

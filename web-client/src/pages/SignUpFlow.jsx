@@ -5,7 +5,12 @@ import { useNavigate } from "react-router-dom";
 import {useDispatch, useSelector} from 'react-redux'
 import { setCredentials } from "../features/auth/authSlice";
 
+
+
 const SignUpFlow = () => {
+
+  const BASEURL = 'https://aeonaxy-full-stack-assignment.onrender.com'
+
 
   const [error, setError] = useState(null)
   const [loading, setLoading] = useState(false)
@@ -33,7 +38,7 @@ const SignUpFlow = () => {
 
     //sending fetch request
 
-    fetch("http://localhost:4000/api/users/", {
+    fetch(`${BASEURL}/api/users/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),

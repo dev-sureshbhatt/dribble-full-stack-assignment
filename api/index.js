@@ -7,8 +7,9 @@ import userRouter from './routes/userRouter.js'
 import cookieParser from 'cookie-parser'
 
 const app = express()
-const PORT =process.env.PORT
+const PORT = process.env.PORT
 const Mongo_String = process.env.MONGO
+
 
 app.use(cors({ credentials: true, origin: 'http://localhost:5173' }))
 app.use(cookieParser({sameSite: 'none', Secure: false, httpOnly: true}))
