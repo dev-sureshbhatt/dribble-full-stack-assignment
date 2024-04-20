@@ -90,7 +90,7 @@ const SignUpFlow = () => {
         <div className="text-right">
           <span>Already a member? </span>
           <span className="font-bold">
-            <Link to={"/upload-image"}> Sign in</Link>
+            <Link to={"/"}> Sign in</Link>
           </span>
         </div>
 

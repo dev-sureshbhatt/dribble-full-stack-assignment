@@ -1,3 +1,13 @@
+# Project Images
+
+![alt text](<web-client/src/assets/SignUp Page.png>)
+
+![alt text](<web-client/src/assets/Upload Profile - Signup Flow 2.png>)
+
+![alt text](<web-client/src/assets/SignUp Flow 3 - SurveyPage.png>)
+
+![alt text](<web-client/src/assets/Verify Email page.png>)
+
 # Backend Workflow Overview
 This backend workflow ensures proper validation, authentication, and data handling during the signup process, enhancing security and user experience.
 
