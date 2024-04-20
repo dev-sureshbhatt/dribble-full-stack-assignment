@@ -11,5 +11,4 @@ export const sendVerifyEmail = (emailToTarget) => resend.emails.send({
   html: '<p>Congrats on sending your <strong>first email</strong>!</p>'
 })
 
-sendVerifyEmail("dev.sureshbhatt@gmail.com")
 console.log("sent")
