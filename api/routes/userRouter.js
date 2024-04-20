@@ -79,7 +79,7 @@ router.post("/users", async (req, res, next) => {
                 .cookie('token', signedToken, {
                   httpOnly: true,
                   sameSite: 'none',
-                  secure: false
+                  secure: true
 
                 })
                 .json({
