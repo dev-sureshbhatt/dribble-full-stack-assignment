@@ -11,7 +11,7 @@ const PORT = process.env.PORT
 const Mongo_String = process.env.MONGO
 
 
-app.use(cors({ credentials: true, origin: 'https://aeonaxy-suresh.netlify.app/' }))
+app.use(cors({ credentials: true, origin: 'https://aeonaxy-suresh.netlify.app' }))
 app.use(cookieParser({sameSite: 'none', Secure: true, httpOnly: true}))
 app.use(express.json())
 
