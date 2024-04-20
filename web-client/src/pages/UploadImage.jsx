@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import HeadingHero from '../components/HeadingHero'
 import Navbar from '../components/Navbar'
-import { Link } from 'react-router-dom'
-import { batch, useSelector } from 'react-redux'
+
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 

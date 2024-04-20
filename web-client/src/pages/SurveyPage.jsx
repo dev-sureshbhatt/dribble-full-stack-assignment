@@ -12,6 +12,8 @@ const SurveyPage = () => {
   const navigate = useNavigate()
 
 
+  
+
   //We define initial form string here with values as false, changing heading, subheading, options here affects the form as form details are mapped via this state 
   const [surveyFormData, setSurveyFormData] = useState({
     heading: "What brings you to Dribble?",

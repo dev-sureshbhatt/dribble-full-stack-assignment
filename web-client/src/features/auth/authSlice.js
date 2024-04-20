@@ -3,7 +3,7 @@
     const authSlice = createSlice({
         name: 'auth',
         //state for user details and token
-        initialState: {user: {name: ''}, token: null},
+        initialState: {user: {name: 'Guest', email: 'youremail@xyx.com'}, token: null},
         reducers: {
             //function to set user credentials based on payload created via API response
             setCredentials(state, action){
