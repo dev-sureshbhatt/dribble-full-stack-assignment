@@ -42,12 +42,13 @@ const SignUpFlow = () => {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
+      credentials: "include"
     })
       .then((response) =>
         response
           .json()
           .then((data) => {
-            //When the user creation is not successful, the API sends an object with success:false value. 
+            //When the user creation is not successful, the backend API sends an object with success:false value. 
             
             if(data.success == false) {
               console.log(data.message)

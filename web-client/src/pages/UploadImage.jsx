@@ -12,6 +12,7 @@ const UploadImage = () => {
   const [profileImage, setProfileImage] = useState([])
   const [location, setLocation] = useState("")
   const navigate = useNavigate()
+  const [loading, setLoading] = useState(false)
   const userDetails = useSelector((state) => state.auth)
   const userName = userDetails.user.name
   // const userToken = userDetails.token  
@@ -27,6 +28,8 @@ const UploadImage = () => {
   function handleSubmit(ev){
     ev.preventDefault()
 
+    setLoading(true)
+
     const data = new FormData()
     data.append('file', profileImage[0])
     data.set('location', location)
@@ -37,6 +40,24 @@ const UploadImage = () => {
       body: data,
       credentials: 'include'
     })
+    .then((response)=>{
+      response.json().then(
+        (data) => {
+          if (data.success == true) {
+
+            navigate('/survey')
+
+          } else {
+
+            alert(data.message)
+            navigate('/')
+
+          }
+        }
+      ).catch((err) => {console.log(err); setLoading(false)})
+    })
+    .catch((err) => {alert("Failed to connect to the Server, please try again. If the problem persists, try again after some time. We apologize for the inconvenience")
+  setLoading(false)})
 
   }
   
@@ -97,8 +118,12 @@ className="">
   <div className='w-1/3'>
     
   <button 
-  
-  className='bg-[#EA4B8B] hover:bg-[#ea4b8ba3] text-white font-bold text-sm py-2 w-full rounded-lg mb-6'>Next</button>
+    disabled={loading}
+    className='bg-[#EA4B8B] hover:bg-[#ea4b8ba3] text-white font-bold text-sm py-2 w-full rounded-lg mb-6'>
+{
+  loading ? ("Loading...") : ("Next")
+}
+  </button>
   
   </div>
 </form>

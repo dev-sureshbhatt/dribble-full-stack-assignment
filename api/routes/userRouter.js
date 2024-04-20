@@ -20,7 +20,7 @@ router.post("/users", async (req, res, next) => {
   try {
     //if there is no required data in request body, we will return error response from here
     if (
-      !req.body.name ||
+      !req.body.name || 
       !req.body.username ||
       !req.body.email ||
       !req.body.password
