@@ -220,6 +220,7 @@ router.put('/users/details', async (req,res)=>{
         const updatedUser = await USER.findByIdAndUpdate(validTokenDetails.newCreatedUser.id, {userSurveyDetails: userSurveyDetails})
          if (updatedUser) {
           res.status(200).json({success: true, message: "User data updated", responseData: {updatedData: userSurveyDetails}})
+          console.log("sending email to ", isValidUser.email )
           sendVerifyEmail(isValidUser.email)
 
          } else {
