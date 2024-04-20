@@ -105,7 +105,11 @@ const SurveyPage = () => {
 
         </div>
         
-        <button onClick={handleSubmit} className='bg-[#EA4B8B] hover:bg-[#ea4b8ba3] text-white font-bold text-sm py-2 rounded-lg w-1/5'>Finish</button>
+        <button disabled={loading} onClick={handleSubmit} className='bg-[#EA4B8B] hover:bg-[#ea4b8ba3] text-white font-bold text-sm py-2 rounded-lg w-1/5'>
+          {
+            loading ? ("Loading...") : ("Finish") 
+          }
+        </button>
         
     </div>
     </div>

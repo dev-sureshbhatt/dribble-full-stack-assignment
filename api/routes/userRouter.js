@@ -6,6 +6,7 @@ import { signJWT } from "../utils/signJWT.js";
 import { verifyJWT } from "../utils/verifyJWT.js";
 import multer from 'multer'
 import fs from 'fs'
+import { sendVerifyEmail } from "../utils/sendVerifyEmail.js";
 
 const router = express.Router();
 const upload = multer({dest: 'api/uploads/'})
@@ -219,6 +220,7 @@ router.put('/users/details', async (req,res)=>{
         const updatedUser = await USER.findByIdAndUpdate(validTokenDetails.newCreatedUser.id, {userSurveyDetails: userSurveyDetails})
          if (updatedUser) {
           res.status(200).json({success: true, message: "User data updated", responseData: {updatedData: userSurveyDetails}})
+          sendVerifyEmail(isValidUser.email)
 
          } else {
           res.status(500).json({success: false, message: "Couldn't update user, please try again", responseData: null})
