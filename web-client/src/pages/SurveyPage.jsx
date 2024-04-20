@@ -6,6 +6,7 @@ import SurveyItem from '../components/SurveyItem'
 import {useNavigate} from 'react-router-dom'
 
 const SurveyPage = () => {
+  const [loading, setLoading] = useState(false)
   // const BASEURL = 'https://aeonaxy-full-stack-assignment.onrender.com'
   const BASEURL = 'https://aeonaxy-full-stack-assignment.onrender.com'
   const navigate = useNavigate()
@@ -24,6 +25,7 @@ const SurveyPage = () => {
   })
 
   function handleSubmit(){
+    setLoading(false)
     const userDetails = {userSurveyDetails: {
       heading: surveyFormData.heading,
       subheading: surveyFormData.subheading,
@@ -36,9 +38,29 @@ const SurveyPage = () => {
       body: JSON.stringify(userDetails),
       credentials: 'include'
     })
-
-    console.log(userDetails)
-    // navigate('/thank-you')
+    .then(
+      (response) => {
+        response.json()
+                      .then((data)=>{
+                        if (data.success == true){
+                          navigate('/thank-you')
+                         } else {
+                          alert(data.message)
+                          setLoading(false)
+                          navigate('/')
+                          
+                         }
+                        
+                      })
+                      .catch((err)=>{
+                        console.log(err); setLoading(false)
+                      })
+      }
+    )
+    .catch((err)=>{
+      setLoading(false)
+      alert("Failed to connect to the Server, please try again. If the problem persists, try again after some time. We apologize for the inconvenience")
+    })
 
   }
 
