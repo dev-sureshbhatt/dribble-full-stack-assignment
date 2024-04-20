@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import HeadingHero from '../components/HeadingHero'
-import Navbar from '../components/Navbar'
 
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -67,7 +66,7 @@ const UploadImage = () => {
   
 
 <div className='flex flex-col justify-center items-center'>
-  <Navbar />
+  
 
 <div>
   <HeadingHero heading={`Welcome ${userName}! Let's create your profile`} subheading={"Let others get to know you better! You can do these later"} />

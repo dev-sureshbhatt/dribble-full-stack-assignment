@@ -27,7 +27,7 @@ const SurveyPage = () => {
   })
 
   function handleSubmit(){
-    setLoading(false)
+    setLoading(true)
     const userDetails = {userSurveyDetails: {
       heading: surveyFormData.heading,
       subheading: surveyFormData.subheading,
@@ -78,7 +78,6 @@ const SurveyPage = () => {
 
     
     <div className='flex flex-col justify-between items-center'>
-      <Navbar />
     <div className='flex flex-col justify-between items-center text-center gap-16'>
 
         <HeadingHero heading={surveyFormData.heading} subheading={surveyFormData.subheading} />
@@ -107,7 +106,7 @@ const SurveyPage = () => {
 
         </div>
         
-        <button disabled={loading} onClick={handleSubmit} className='bg-[#EA4B8B] hover:bg-[#ea4b8ba3] text-white font-bold text-sm py-2 rounded-lg w-1/5'>
+        <button disabled={loading} onClick={handleSubmit} className='bg-[#EA4B8B] hover:bg-[#ea4b8ba3] text-white font-bold text-sm py-2 rounded-lg mb-5 px-[40px]'>
           {
             loading ? ("Loading...") : ("Finish") 
           }

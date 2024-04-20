@@ -14,7 +14,6 @@ const userEmail = userDetails.user.email
   return (
     
     <div className='flex flex-col justify-between items-center'>
-      <Navbar />
     <div className='flex flex-col justify-between items-center text-center sm:w-1/2'>
 
         <HeadingHero heading={"Please verify your email..."} subheading={""} />
