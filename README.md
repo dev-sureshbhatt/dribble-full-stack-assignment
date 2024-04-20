@@ -3,12 +3,17 @@ This backend workflow ensures proper validation, authentication, and data handli
 
 
 ## General Response Format of all endpoints
-For every successful request to the backend, the endpoint responds with a JSON data structure containing:
-- success: Boolean indicating the success status of the request (true for successful requests, false for unsuccessful ones).
-- message: Custom message that the client can use to display alert or error messages to the user.
-- responseData: Contains the specific data related to the request, such as user details, survey responses, etc. (null for unsuccessful requests).
 
+For every request to the backend, the endpoint responds with a JSON data structure containing. 
+```
+{
+    "success": false, //Boolean indicating the success status of the request (true for successful requests, false for unsuccessful ones)
+    "message": "You are unauthorized, please try again", // Custom message that the client can use to display alert or error messages to the user.
+    "responseData": null //Contains the specific data related to the request, such as user details, survey responses, etc. (null for unsuccessful requests).
+}
+```
 The backend consistently sends responses in the specified format. When a request is successfully processed, the 'success' value will be true, enabling further client-side logic implementation.
+
 
 ## Process/Approach 
 
