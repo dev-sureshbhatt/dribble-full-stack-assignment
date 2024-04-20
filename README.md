@@ -84,7 +84,87 @@ The utils folder in this backend project includes several utility modules to fac
 - **Returns**: Promise indicating the status of the email sending process.
 
 
+# Frontend Documentation
 
+## Authentication and State Management Overview
+
+### Redux Setup
+The application utilizes Redux for managing user state (The project planning included using the same for authentication, but the functionality isn't complete yet, so authentication and fetching is handled using cookies only).
+
+**Auth Slice**
+- Manages user details and authentication token.
+- Contains actions for setting user credentials and logging out.
+
+**Actions**
+- setCredentials: Sets the user credentials based on the payload received from the API response.
+- logOut: Clears user session by setting user details and credentials to null.
+
+**Usage**
+- Handles user signup.
+- Dispatches actions to set user details  credentials upon successful signup.
+- These details can now be used to personalised experience such as displaying name, username, email, profileImage etc
+
+
+**Note**
+Redux was used for enhanced authentication and state management but complete functionalites are yet not produced. Future enhancements include adding logout functionality when server endpoints for cookie invalidation are available.
+
+
+## Reusable Components
+
+### InputDiv Component
+The InputDiv component is a reusable input field component used in the SignUp form for capturing user information. It provides a structured input field with labels and placeholders for ease of use and better user experience.
+
+#### Props
+- name: The name of the input field.
+- type: The type of input field (e.g., text, email, password).
+- label: The label displayed above the input field.
+- placeholder: Placeholder text displayed in the input field.
+- onChange: Function to handle input value changes.
+
+#### Example Usage
+
+```
+<InputDiv
+  name="name"
+  type="text"
+  label="Name"
+  placeholder="Enter your name"
+  value={formData.name}
+  onChange={(value) => handleChange("name", value)}
+/>
+
+```
+Here's how it looks in action:
+
+![alt text](<web-client/src/assets/INPUT Reusable Component.png>)
+
+The InputDiv component encapsulates an input field with dynamic properties for customization. It handles input value changes through the onChange function provided as a prop, making it versatile and suitable for various input scenarios in the SignUp form.
+
+### SurveyItem Component
+The SurveyItem component is a reusable component used in the survey form to display options with an image, text, and a checkbox for selection.
+
+**Props**
+- imageURL: The URL of the image to be displayed.
+- label: The text label associated with the option.
+- id: The unique identifier for the input checkbox.
+- checked: Boolean indicating whether the checkbox is checked or not.
+- onToggle: Function to handle checkbox toggle events.
+
+**Example Usage**
+```
+<SurveyItem 
+  imageURL={'URL_TO_IMAGE'}
+  label={"I am looking for design inspiration"}
+  id={"unique_id"}
+  checked={checked_state_variable}
+  onToggle={handleToggleFunction}
+/>
+
+```
+Here's how it looks in action
+![alt text](<web-client/src/assets/SurveyItem Reusable Component.png>)
+
+The SurveyItem component encapsulates an option in the survey form with an image, descriptive text, and a checkbox for selection. It helps render different visual representation of options that are available for selection.
 
 
 
