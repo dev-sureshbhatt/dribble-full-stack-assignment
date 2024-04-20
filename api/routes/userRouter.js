@@ -205,16 +205,43 @@ router.put('/users/uploadimage', upload.single('file') , async (req,res)=>{
 })
 
 /* Route to update other information about the user (survey form viz what brings you to Dribble) */
-router.put('/user/details', async (req,res)=>{
-  if (req.cookies.token) {
+router.put('/users/details', async (req,res)=>{
+  
+  try {
+  
+    if (req.cookies.token) {
+      const {token} = req.cookies
+      const validTokenDetails = await verifyJWT(token)
+      const isValidUser = await USER.findById(validTokenDetails.newCreatedUser.id)
+      const userSurveyDetails = req.body
+      if (isValidUser && validTokenDetails && userSurveyDetails) {
+        
+        const updatedUser = await USER.findByIdAndUpdate(validTokenDetails.newCreatedUser.id, {userSurveyDetails: userSurveyDetails})
+         if (updatedUser) {
+          res.status(200).json({success: true, message: "User data updated", responseData: {updatedData: userSurveyDetails}})
 
-    const {token} = req.cookies.token
+         } else {
+          res.status(500).json({success: false, message: "Couldn't update user, please try again", responseData: null})
+         }
+        
+
+      } else {
+        res.json(204).json({
+          success: true,
+          message: "User authorized but nothing to update",
+          responseData: null
+
+        })
+      }
+  
+    } else {
+      res.status(401).json({success: false, msg: "You're not authorized or Session expired, please login again"})
+    }
     
-
-
-  } else {
-    res.json({msg: "You're not authorized or Session expired, please login again"})
+  } catch (error) {
+    next(error)
   }
+  
 })
 
 

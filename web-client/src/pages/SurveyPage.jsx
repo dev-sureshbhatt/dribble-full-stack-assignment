@@ -6,6 +6,8 @@ import SurveyItem from '../components/SurveyItem'
 import {useNavigate} from 'react-router-dom'
 
 const SurveyPage = () => {
+  // const BASEURL = 'https://aeonaxy-full-stack-assignment.onrender.com'
+  const BASEURL = 'https://aeonaxy-full-stack-assignment.onrender.com'
   const navigate = useNavigate()
 
 
@@ -22,11 +24,18 @@ const SurveyPage = () => {
   })
 
   function handleSubmit(){
-    const userDetails = {
+    const userDetails = {userSurveyDetails: {
       heading: surveyFormData.heading,
       subheading: surveyFormData.subheading,
       options: surveyFormData.options
-    };
+    }}
+
+    fetch(`${BASEURL}/api/users/details`, {
+      method: "PUT",
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(userDetails),
+      credentials: 'include'
+    })
 
     console.log(userDetails)
     // navigate('/thank-you')
