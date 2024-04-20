@@ -1,7 +1,9 @@
 import mongoose from 'mongoose'
+import { userDetailsSchema } from './surveyModel.js'
 
+
+//User Schema Here
 const userSchema = new mongoose.Schema({
-
     name:{
         type: String,
         required: true
@@ -32,11 +34,9 @@ const userSchema = new mongoose.Schema({
         default: ""
     },
     userSurveyDetails: {
-        type: Object,
-        default: {
-            
-        }
-    } 
+        type: userDetailsSchema,
+        default: {}
+    }
 
 
 })
