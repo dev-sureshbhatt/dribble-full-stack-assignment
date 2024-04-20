@@ -213,9 +213,9 @@ router.put('/users/details', async (req,res)=>{
       const {token} = req.cookies
       const validTokenDetails = await verifyJWT(token)
       const isValidUser = await USER.findById(validTokenDetails.newCreatedUser.id)
-      const userSurveyDetails = req.body
+      const {userSurveyDetails} = req.body
       if (isValidUser && validTokenDetails && userSurveyDetails) {
-        
+        console.log("this is request to updatedUser", userSurveyDetails)
         const updatedUser = await USER.findByIdAndUpdate(validTokenDetails.newCreatedUser.id, {userSurveyDetails: userSurveyDetails})
          if (updatedUser) {
           res.status(200).json({success: true, message: "User data updated", responseData: {updatedData: userSurveyDetails}})
