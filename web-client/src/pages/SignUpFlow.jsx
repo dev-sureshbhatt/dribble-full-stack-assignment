@@ -82,11 +82,11 @@ const SignUpFlow = () => {
       {/* left fold Image div */}
 
       <div className="hidden md:inline sm:w-2/5">
-        <img src="\src\assets\signup-bg2.png" className="h-screen w-full" />
+        <img src="https://miro.medium.com/v2/resize:fit:4800/format:webp/1*pSw3E-6LA_rcB-u6UDxbyA.png" className="h-screen w-full" />
       </div>
 
       {/* for sign in link (not navbar)*/}
-      <div className="sm:w-3/5 bg-white">
+      <div className="sm:w-3/5 bg-white mx-3 my-2">
         <div className="text-right">
           <span>Already a member? </span>
           <span className="font-bold">

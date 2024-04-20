@@ -77,7 +77,7 @@ const SurveyPage = () => {
   return ( 
 
     
-    <div className='flex flex-col justify-between items-center'>
+    <div className='flex flex-col justify-between items-center mx-3 my-2'>
     <div className='flex flex-col justify-between items-center text-center gap-16'>
 
         <HeadingHero heading={surveyFormData.heading} subheading={surveyFormData.subheading} />

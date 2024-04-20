@@ -13,7 +13,7 @@ const userDetails = useSelector((state) => state.auth)
 const userEmail = userDetails.user.email
   return (
     
-    <div className='flex flex-col justify-between items-center'>
+    <div className='flex flex-col justify-between items-center mx-3 my-2'>
     <div className='flex flex-col justify-between items-center text-center sm:w-1/2'>
 
         <HeadingHero heading={"Please verify your email..."} subheading={""} />

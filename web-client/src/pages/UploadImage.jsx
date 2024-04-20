@@ -65,7 +65,7 @@ const UploadImage = () => {
     
   
 
-<div className='flex flex-col justify-center items-center'>
+<div className='flex flex-col justify-center items-center mx-5 my-2'>
   
 
 <div>
